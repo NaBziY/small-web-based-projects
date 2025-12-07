@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome checker</title>
+    <style>
+        .body{
+            margin: 0;
+            padding: 0;
+            display: 100%;
+            display: flex;
+            background-color: brown;
+            align-items: center;
+            justify-content: center;
+            justify-items: center;
+        }
+
+        .main-box{
+            background-color: bisque;
+            height: 400px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 5px 1px;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            margin: 55px;
+            align-items: center;
+        }
+        .input{
+            height: 20px;
+            width: 170px;
+            border-radius: 5px;
+            padding: 2px;
+            padding-left: 3px;
+
+        }
+        .btn{
+            height: 25px;
+            width: 50px;
+            padding: 1px;
+            border-radius: 5px;
+        }
+        #userWord{
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body class="body">
+    <div class="main-box">
+        <h3>Palindrome checker</h3>
+        <div>
+            <input class="input" type="text" placeholder="Input the word...">
+            <button class="btn" onclick="palindrome()">Check</button>
+        </div>
+
+        <p>Your word: <span id="userWord">--------</span></p>
+        <p id="outputBox"></p>
+
+    </div>
+
+
+<script>
+
+let input = document.getElementsByClassName("input")[0];
+let userWord = document.getElementById("userWord");
+let outputBox = document.getElementById("outputBox");
+
+function palindrome(){
+    let str = input.value;
+
+    let cleanedStr = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    if (str.trim() === "") {
+        userWord.textContent = "N/A";
+        outputBox.textContent = "You didn't type anything!";
+        outputBox.style.color = "red";
+        return;
+    }    
+    
+    userWord.textContent = str;
+
+    let reversedStr = cleanedStr.split('').reverse().join('');
+
+    if(cleanedStr === reversedStr){
+        outputBox.textContent = "Is a palindrome!!!";
+        outputBox.style.color = "green";
+    }else{
+        outputBox.textContent = "Isn't a palindrome";
+        outputBox.style.color = "gray";
+    }
+}
+
+input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        palindrome();
+    }
+});
+
+</script>
+
+
+</body>
+</html>
